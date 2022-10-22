@@ -22,8 +22,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ## References
-[I²C - Wikipedia - Example of bit-banging the I2C protocol](https://en.wikipedia.org/wiki/I%C2%B2C#Example_of_bit-banging_the_I.C2.B2C_master_protocol)
-[bitbang-hal](https://github.com/sajattack/bitbang-hal)
+- [I²C - Wikipedia - Example of bit-banging the I2C protocol](https://en.wikipedia.org/wiki/I%C2%B2C#Example_of_bit-banging_the_I.C2.B2C_master_protocol)
+
+- [bitbang-hal](https://github.com/sajattack/bitbang-hal)
 
 # License
 This project is released under the [Unlicense](https://unlicense.org/).
