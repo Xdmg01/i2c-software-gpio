@@ -1,0 +1,13 @@
+[package]
+name = "i2c-software-gpio"
+version = "0.1.0"
+description = "Bitbanging I2C GPIO using sysfs"
+authors = ["Alejandro <alejandro@underflow.ga>"]
+license = "WTFPL"
+edition = "2021"
+
+[dependencies]
+sysfs_gpio = "0.6"
+
+[dependencies.embedded-hal]
+version = "0.2.7"
