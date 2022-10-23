@@ -139,7 +139,9 @@ impl I2cGPIO {
     fn write_slice(&mut self, output: &[u8]) -> Result<(), sysfs_gpio::Error> {
         for byte in output {
             let ack = self.write_byte(*byte)?;
-            dbg!("ACK = {}", ack);
+            if ack == 1 {
+                return Err(sysfs_gpio::Error::Unexpected("No ACK".to_string())) 
+            }
         }
         Ok(())
     }
@@ -195,7 +197,10 @@ impl Write for I2cGPIO {
         self.start()?;
 
         let ack = self.write_byte((address << 1) | 0x0)?;
-        dbg!("ACK = {}", ack);
+        if ack == 1 {
+            return Err(sysfs_gpio::Error::Unexpected("No ACK".to_string())) 
+        }
+
 
         self.write_slice(bytes)?;
 
@@ -213,7 +218,9 @@ impl Read for I2cGPIO {
         self.start()?;
 
         let ack = self.write_byte((address << 1) | 0x1)?;
-        dbg!("ACK = {}", ack);
+        if ack == 1 {
+            return Err(sysfs_gpio::Error::Unexpected("No ACK".to_string())) 
+        }
 
         self.read_slice(buffer)?;
 
@@ -237,14 +244,18 @@ impl WriteRead for I2cGPIO {
         self.start()?;
 
         let mut ack = self.write_byte((address << 1) | 0x0)?;
-        dbg!("ACK = {}", ack);
+        if ack == 1 {
+            return Err(sysfs_gpio::Error::Unexpected("No ACK".to_string())) 
+        }
 
         self.write_slice(bytes)?;
 
         self.start()?;
 
         ack = self.write_byte((address << 1) | 0x1)?;
-        dbg!("ACK = {}", ack);
+        if ack == 1 {
+            return Err(sysfs_gpio::Error::Unexpected("No ACK".to_string())) 
+        }
 
         self.read_slice(buffer)?;
 
